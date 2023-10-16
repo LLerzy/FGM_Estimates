@@ -366,6 +366,7 @@ Mtovar=function(x1,x2,alp){
 # useDependence: If this is True, the graphs of the method cho_method=7 
 # are constructed, in this case of the a priori Beta. therwise, the graphs 
 # of all methods are constructed.
+# useAsymtotic: Used to graph asymptotic intervals of ML estimates. When this is FALSE are not graphed.
 # m: descriptive measure that will be graphed. 
 GeneralGraph = function(m, omega = NULL, omega_to_file = NULL, useDependence = FALSE,useAsymtotic=FALSE,cho_method=7) {
   nameGra = c("Min", "Mean", "SD", "Max", "Bias", "Length", "Coverage")
