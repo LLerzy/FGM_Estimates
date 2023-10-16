@@ -1,0 +1,15 @@
+model
+      {  
+      const <-10000
+      for(i in 1 : n) {
+      z[i] <- 1
+      z[i] ~ dbern(p[i])
+      p[i] <- ( 1 + varphi*(1-2*u[i])*(1-2*v[i]) ) / const
+      }
+      y <- 0
+      y ~ dloglik(rho)
+      indicator1 <- step(varphi-c); indicator2 <- step(1+varphi); indicator3 <- step(1-varphi)
+      LogP <- indicator2*(1-indicator1)*(varphi+1)/(c+1) + indicator1*indicator3*(1-varphi)/(1-c)
+      varphi ~ dflat()
+      rho <- log(LogP)
+      }
