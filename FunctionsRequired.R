@@ -372,7 +372,7 @@ GeneralGraph = function(m, omega = NULL, omega_to_file = NULL, useDependence = F
   nameGra = c("Min", "Mean", "SD", "Max", "Bias", "Length", "Coverage")
   colName = ifelse(useDependence, "Dependence", "Method")
   if(useDependence) {labelSet =c("SND","WND", "WPD", "SPD")} else if(useAsymtotic) {
-    labelSet = c("ML_Asymptotic","ML", "Tau-Kendall", "Spearman", "Triangular", "Beta", "Uniform")} else
+    labelSet = c("ML Asymptotic","ML", "Tau-Kendall", "Spearman", "Triangular", "Beta", "Uniform")} else
     {labelSet = c("ML", "Tau-Kendall", "Spearman", "Triangular", "Beta", "Uniform")}
   namemethod = 1:length(labelSet)
   
