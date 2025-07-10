@@ -1,27 +1,28 @@
-# Estimación del parámetro de dependencia FGM usando métodos clásicos y métodos bayesianos informativos.
+# Estimation of the FGM Copula Dependence Parameter Using Classical and Informative Bayesian Methods
 
-Este repositorio contiene los resultados de un estudio de simulación sobre la estimación del parámetro de dependencia FGM. La función de densidad de la copula FGM es:
+This repository contains the results of a simulation study focused on estimating the dependence parameter of the FGM copula. The corresponding density function is:
 
 $$c_{\varphi}(u,v)= (1+\varphi(1-2u)(1-2v)),$$
 
-donde $\varphi$ es el parámetro de dependencia, cuyo espacio de valores es el intervalo $(0,1)$.
+where $\varphi$ is the dependence parameter, defined in the interval $(0,1)$.
 
 ## Table of Contents
 
--   [Overview](#overview)
--   [Installation](#installation)
--   [Usage](#usage)
--   [Included Functions](#included-functions)
--   [Contributions](#contributions)
-## Overview
+* [Overview](#overview)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Included Functions](#included-functions)
+* [Results](#results)
+* [Contributions](#contributions)
 
-Los métodos de estimación clásicos utilizados fue el método de máxima verosimilitud y métodos de momentos generados por el coeficiente de concordancia Tau de Kendall, Rho de Spearman y Blomqvist’s Beta,
-mientras que desde el enfoque Bayesiano fueron utilizadas las distribuciones a priori Triangular, Beta de cuatro parámetros y Uniforme. Debido a que las integrales obtenidas para la distribución posterior no tienen forma cerrada,
-como por ejemplo la producida por la prior beta de cuatro parámetros:
+## Overview
+This repository presents a simulation study on the estimation of the dependence parameter of the FGM copula. Classical estimation methods, such as maximum likelihood and moment-based estimators using Kendall's Tau, Spearman's Rho, and Blomqvist’s Beta, are compared with informative Bayesian approaches employing Triangular, four-parameter Beta, and Uniform prior distributions.
+
+Since the resulting posterior distributions—such as the one induced by the four-parameter Beta prior—do not have a closed form, the Metropolis-Hastings algorithm was applied in two variants: the standard form (using a uniform instrumental distribution) and the random walk version (using the four-parameter Beta distribution as instrumental). For example, the posterior is given by:
 
 $$\dfrac{ (1+\varphi)^{\tilde\alpha-1} ( 1-\varphi)^{\tilde\beta-1}\prod\limits_{i = 1}^n c_{\varphi}(\hat u_i,\hat v_i)}{\int_{-1}^{1} (1+\varphi)^{\tilde\alpha-1} ( 1-\varphi)^{\tilde\beta-1}\cdot\prod\limits_{i = 1}^n c_{\varphi}(\hat u_i,\hat v_i)  d\varphi}$$
 
-fue necesario utilizar el método de Metropolis-Hasting en su forma estándar (usando la distribución uniforme como instrumental) y en sú forma de camianta aleatoria (usando la distribución beta de cuatro parámetros como instrumental).
+Convergence monitoring for this algorithm was conducted using graphical tools such as the histogram overlaid with the fitted density, trace plots, cumulative averages, and autocorrelation functions. An example of these results, based on a Beta prior and a chain of 5,000 iterations, is available here: [Beta Prior Results](https://github.com/LLerzy/FGM_Estimates/blob/main/Graphics/ResultsBetaBeta.png).
 
 ## Installation
 
@@ -48,21 +49,23 @@ To run the designed algorithms, follow these steps:
 
 1. Clone this repository:
 
-    ``` bash
-    git clone [https://github.com/LLerzy/Estimation-Parameter-Beta/tree/main.git](https://github.com/LLerzy/FGM_Estimates.git)
-    ```
+```bash
+git clone https://github.com/LLerzy/FGM_Estimates.git
+```
 
-2. Open the R script in any compatible Integrated Development Environment (IDE):
+2. Open the scripts in an R-compatible development environment. The main files are:
 
-    -   For the script that contains the main functions in the shape parameter estimation process, refer to [`FunctionsRequired.R`](https://github.com/LLerzy/FGM_Estimates/blob/main/FunctionsRequired.R).
-    -   El script que contiene el esquema de simulación utilizado para obtener los resultados de simulación puede ser consultado en: [`SimulationStudy.R`](https://github.com/LLerzy/FGM_Estimates/blob/main/SimulationStudy.R).
-    -   EL script que contiene el código para obtener la estimación del parámetro de dependencia asociada al conjunto de dengue puede ser consultado en: [`DengueDataSet.R`](https://github.com/LLerzy/FGM_Estimates/blob/main/DengueData/DengueDataSet.R).
+* [`FunctionsRequired.R`](https://github.com/LLerzy/FGM_Estimates/blob/main/FunctionsRequired.R): main functions for parameter estimation.
+* [`SimulationStudy.R`](https://github.com/LLerzy/FGM_Estimates/blob/main/SimulationStudy.R): simulation study scheme.
+* [`DengueDataSet.R`](https://github.com/LLerzy/FGM_Estimates/blob/main/DengueData/DengueDataSet.R): application using dengue data.
 
-3. You can run the script and load all the functions with the following command:
+3. To load the functions and run the scripts:
 
-    ``` bash
-    Rscript FunctionsRequired.R
-    ```
+```bash
+Rscript FunctionsRequired.R
+Rscript SimulationStudy.R
+Rscript DengueData/DengueDataSet.R
+```
 
 ## Included Functions
 
@@ -81,10 +84,15 @@ The functions defined in the `FunctionsRequired.R` script include:
 -   `GeneralGraph`: Aggregated plot generation for simulation results.
 -   `Marginal`: Empirical marginal distribution estimation.
 
-### Notes:
+**Note:** It is recommended to review and adapt each function to the specific needs of your analysis. Understanding each routine is essential to avoid misinterpretation of the results.
 
--   It is recommended to review and adapt each function according to the specific needs of each analysis.
--   Make sure you understand each function before using it to ensure accurate results and avoid potential errors.
+## Results
+
+The graphical results from the simulation study can be found in the [`Graphics`](https://github.com/LLerzy/FGM_Estimates/tree/main/Graphics) folder.
+
+Numerical results from the simulations are available in the [`Results`](https://github.com/LLerzy/FGM_Estimates/tree/main/Results) folder.
+
+The results of the method applied to the dengue dataset can be found in the [`DengueData`](https://github.com/LLerzy/FGM_Estimates/tree/main/DengueData) folder, particularly in the `DengueData6.RData` file, which stores all the results obtained.
 
 ## Contributions
 
